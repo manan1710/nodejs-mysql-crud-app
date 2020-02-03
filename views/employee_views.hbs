@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CRUD Node.js and Mysql</title>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Employee List</h2>
+        <button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+        <table class="table table-striped" id="mytable">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Code</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results}}
+                <tr>
+                    <td>{{ empid }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ empcode }}</td>
+                    <td>{{ salary }}</td>
+                    <td>
+                        {{!-- <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{ product_id }}"
+                            data-product_name="{{ product_name }}" data-product_price="{{ product_price }}">Edit</a> --}}
+                           
+                        <a href="/employees/{{empid}}" class="btn btn-sm btn-info edit">Edit</a>
+
+                        {{!-- <a href="javascript:void(0);" class="btn btn-sm btn-danger delete"
+                            data-id="{{ product_id }}">Delete</a> --}}
+
+                        <a href="/delete/{{empid}}" class="btn btn-sm btn-danger delete">Delete</a>    
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Add Product-->
+    <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Employee Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="empcode" class="form-control" placeholder="Employee Code" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="salary" class="form-control" placeholder="Employee Salary"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal Update Product-->
+    <form action="/update" method="post">
+        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" name="empname" class="form-control empname"
+                                placeholder="Employee Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="empcode" class="form-control empcode" placeholder="Employee Code"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="salary" class="form-control salary" placeholder="Employee Salary"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="empid" class="empid">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+       /* $(document).ready(function () {
+            //showing data to edit modal      
+            alert('ABCDE');
+            $('#mytable').on('click','.edit',function(){
+            var emp_id = $(this).data('empid');
+            var emp_name = $(this).data('empname');
+            var emp_code = $(this).data('empcode');
+            var emp_salary = $(this).data('salary');
+            $('#EditModal').modal('show');
+            $('.employee_name').val(emp_name);
+            $('.empcode').val(emp_code);
+            $('.salary').val(emp_salary);
+            $('.empid').val(emp_id)
+        });*/
+
+        /*$(document).ready(function () {
+            //showing data to edit modal      
+            alert('ABCDE');
+            
+        //showing delete record modal
+        $('#mytable').on('click', '.delete', function () {
+            var product_id = $(this).data('id');
+            $('#DeleteModal').modal('show');
+            $('.product_id2').val(product_id);
+        });
+ 
+    });*/
+
+    /*$('#mytable').on('click','.edit',function(){
+        
+            var emp_id = $(this).data('empid');
+            var emp_name = $(this).data('empname');
+            var emp_code = $(this).data('empcode');
+            var emp_salary = $(this).data('salary');
+
+            alert(emp_name);
+
+            $('#EditModal').modal('show');
+            $('.empname').val('manan');
+            $('.empcode').val(emp_code);
+            $('.salary').val(emp_salary);
+            $('.empid').val(emp_id)
+        });*/
+    </script>
+</body>
+
+</html>
